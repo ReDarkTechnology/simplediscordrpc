@@ -36,6 +36,18 @@ namespace DiscordRPCCustom
 		private System.Windows.Forms.TextBox textBox6;
 		private System.Windows.Forms.Label label10;
 		private System.Windows.Forms.TextBox textBox7;
+		private System.Windows.Forms.Label label11;
+		private System.Windows.Forms.Label label12;
+		private System.Windows.Forms.TextBox textBox8;
+		private System.Windows.Forms.Label label13;
+		private System.Windows.Forms.TextBox textBox9;
+		private System.Windows.Forms.Label label14;
+		private System.Windows.Forms.TextBox textBox10;
+		private System.Windows.Forms.Label label15;
+		private System.Windows.Forms.TextBox textBox11;
+		private System.Windows.Forms.Label label16;
+		private System.Windows.Forms.PictureBox pictureBox1;
+		private System.Windows.Forms.CheckBox checkBox2;
 		
 		/// <summary>
 		/// Disposes resources used by the form.
@@ -44,6 +56,7 @@ namespace DiscordRPCCustom
 		protected override void Dispose(bool disposing)
 		{
 			if (disposing) {
+				//this.CloseThreadLoop();
 				if (components != null) {
 					components.Dispose();
 				}
@@ -82,6 +95,19 @@ namespace DiscordRPCCustom
 			this.textBox6 = new System.Windows.Forms.TextBox();
 			this.label10 = new System.Windows.Forms.Label();
 			this.textBox7 = new System.Windows.Forms.TextBox();
+			this.label11 = new System.Windows.Forms.Label();
+			this.label12 = new System.Windows.Forms.Label();
+			this.textBox8 = new System.Windows.Forms.TextBox();
+			this.label13 = new System.Windows.Forms.Label();
+			this.textBox9 = new System.Windows.Forms.TextBox();
+			this.label14 = new System.Windows.Forms.Label();
+			this.textBox10 = new System.Windows.Forms.TextBox();
+			this.label15 = new System.Windows.Forms.Label();
+			this.textBox11 = new System.Windows.Forms.TextBox();
+			this.label16 = new System.Windows.Forms.Label();
+			this.pictureBox1 = new System.Windows.Forms.PictureBox();
+			this.checkBox2 = new System.Windows.Forms.CheckBox();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -110,8 +136,10 @@ namespace DiscordRPCCustom
 			this.textBox1.ForeColor = System.Drawing.SystemColors.Window;
 			this.textBox1.Location = new System.Drawing.Point(93, 37);
 			this.textBox1.Name = "textBox1";
+			this.textBox1.PasswordChar = '*';
 			this.textBox1.Size = new System.Drawing.Size(276, 20);
 			this.textBox1.TabIndex = 2;
+			this.textBox1.TextChanged += new System.EventHandler(this.TextBox1TextChanged);
 			// 
 			// label3
 			// 
@@ -188,9 +216,9 @@ namespace DiscordRPCCustom
 			// label7
 			// 
 			this.label7.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-			this.label7.Location = new System.Drawing.Point(13, 227);
+			this.label7.Location = new System.Drawing.Point(51, 378);
 			this.label7.Name = "label7";
-			this.label7.Size = new System.Drawing.Size(275, 14);
+			this.label7.Size = new System.Drawing.Size(237, 32);
 			this.label7.TabIndex = 10;
 			this.label7.Text = "Discord RPC isn\'t running";
 			// 
@@ -198,7 +226,7 @@ namespace DiscordRPCCustom
 			// 
 			this.button1.BackColor = System.Drawing.SystemColors.Control;
 			this.button1.ForeColor = System.Drawing.SystemColors.ControlText;
-			this.button1.Location = new System.Drawing.Point(294, 223);
+			this.button1.Location = new System.Drawing.Point(294, 387);
 			this.button1.Name = "button1";
 			this.button1.Size = new System.Drawing.Size(75, 23);
 			this.button1.TabIndex = 11;
@@ -290,12 +318,139 @@ namespace DiscordRPCCustom
 			this.textBox7.Size = new System.Drawing.Size(276, 20);
 			this.textBox7.TabIndex = 18;
 			// 
+			// label11
+			// 
+			this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+			this.label11.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+			this.label11.Location = new System.Drawing.Point(13, 229);
+			this.label11.Name = "label11";
+			this.label11.Size = new System.Drawing.Size(103, 21);
+			this.label11.TabIndex = 20;
+			this.label11.Text = "Primary Button";
+			// 
+			// label12
+			// 
+			this.label12.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+			this.label12.Location = new System.Drawing.Point(13, 256);
+			this.label12.Name = "label12";
+			this.label12.Size = new System.Drawing.Size(74, 14);
+			this.label12.TabIndex = 24;
+			this.label12.Text = "Button Text";
+			// 
+			// textBox8
+			// 
+			this.textBox8.BackColor = System.Drawing.SystemColors.WindowFrame;
+			this.textBox8.ForeColor = System.Drawing.SystemColors.Window;
+			this.textBox8.Location = new System.Drawing.Point(93, 253);
+			this.textBox8.Name = "textBox8";
+			this.textBox8.Size = new System.Drawing.Size(276, 20);
+			this.textBox8.TabIndex = 23;
+			// 
+			// label13
+			// 
+			this.label13.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+			this.label13.Location = new System.Drawing.Point(13, 279);
+			this.label13.Name = "label13";
+			this.label13.Size = new System.Drawing.Size(74, 14);
+			this.label13.TabIndex = 22;
+			this.label13.Text = "Button Url";
+			// 
+			// textBox9
+			// 
+			this.textBox9.BackColor = System.Drawing.SystemColors.WindowFrame;
+			this.textBox9.ForeColor = System.Drawing.SystemColors.ControlDark;
+			this.textBox9.Location = new System.Drawing.Point(93, 276);
+			this.textBox9.Name = "textBox9";
+			this.textBox9.ReadOnly = true;
+			this.textBox9.Size = new System.Drawing.Size(276, 20);
+			this.textBox9.TabIndex = 21;
+			this.textBox9.Text = "Disabled";
+			// 
+			// label14
+			// 
+			this.label14.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+			this.label14.Location = new System.Drawing.Point(13, 327);
+			this.label14.Name = "label14";
+			this.label14.Size = new System.Drawing.Size(74, 14);
+			this.label14.TabIndex = 29;
+			this.label14.Text = "Button Text";
+			// 
+			// textBox10
+			// 
+			this.textBox10.BackColor = System.Drawing.SystemColors.WindowFrame;
+			this.textBox10.ForeColor = System.Drawing.SystemColors.Window;
+			this.textBox10.Location = new System.Drawing.Point(93, 324);
+			this.textBox10.Name = "textBox10";
+			this.textBox10.Size = new System.Drawing.Size(276, 20);
+			this.textBox10.TabIndex = 28;
+			// 
+			// label15
+			// 
+			this.label15.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+			this.label15.Location = new System.Drawing.Point(13, 350);
+			this.label15.Name = "label15";
+			this.label15.Size = new System.Drawing.Size(74, 14);
+			this.label15.TabIndex = 27;
+			this.label15.Text = "Button Url";
+			// 
+			// textBox11
+			// 
+			this.textBox11.BackColor = System.Drawing.SystemColors.WindowFrame;
+			this.textBox11.ForeColor = System.Drawing.SystemColors.ControlDark;
+			this.textBox11.Location = new System.Drawing.Point(93, 347);
+			this.textBox11.Name = "textBox11";
+			this.textBox11.ReadOnly = true;
+			this.textBox11.Size = new System.Drawing.Size(276, 20);
+			this.textBox11.TabIndex = 26;
+			this.textBox11.Text = "Disabled";
+			// 
+			// label16
+			// 
+			this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+			this.label16.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+			this.label16.Location = new System.Drawing.Point(13, 300);
+			this.label16.Name = "label16";
+			this.label16.Size = new System.Drawing.Size(103, 21);
+			this.label16.TabIndex = 25;
+			this.label16.Text = "Second Button";
+			// 
+			// pictureBox1
+			// 
+			this.pictureBox1.Location = new System.Drawing.Point(13, 378);
+			this.pictureBox1.Name = "pictureBox1";
+			this.pictureBox1.Size = new System.Drawing.Size(32, 32);
+			this.pictureBox1.TabIndex = 30;
+			this.pictureBox1.TabStop = false;
+			// 
+			// checkBox2
+			// 
+			this.checkBox2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+			this.checkBox2.Location = new System.Drawing.Point(294, 371);
+			this.checkBox2.Name = "checkBox2";
+			this.checkBox2.Size = new System.Drawing.Size(74, 15);
+			this.checkBox2.TabIndex = 31;
+			this.checkBox2.Text = "Startup";
+			this.checkBox2.UseVisualStyleBackColor = true;
+			this.checkBox2.CheckedChanged += new System.EventHandler(this.CheckBox2CheckedChanged);
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-			this.ClientSize = new System.Drawing.Size(381, 253);
+			this.ClientSize = new System.Drawing.Size(380, 421);
+			this.Controls.Add(this.checkBox2);
+			this.Controls.Add(this.pictureBox1);
+			this.Controls.Add(this.label14);
+			this.Controls.Add(this.textBox10);
+			this.Controls.Add(this.label15);
+			this.Controls.Add(this.textBox11);
+			this.Controls.Add(this.label16);
+			this.Controls.Add(this.label12);
+			this.Controls.Add(this.textBox8);
+			this.Controls.Add(this.label13);
+			this.Controls.Add(this.textBox9);
+			this.Controls.Add(this.label11);
 			this.Controls.Add(this.label10);
 			this.Controls.Add(this.textBox7);
 			this.Controls.Add(this.label9);
@@ -322,9 +477,11 @@ namespace DiscordRPCCustom
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "MainForm";
 			this.Text = "Discord Rich Presence";
-			this.MouseDown += this.MainForm_MouseDown;
+			this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseDown);
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
+
 		}
 	}
 }

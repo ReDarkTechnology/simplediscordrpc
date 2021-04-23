@@ -2,6 +2,7 @@
 using System.IO;
 using System.Windows.Forms;
 using DiscordRPC;
+using Microsoft.Win32;
 
 namespace DiscordRPCCustom
 {
@@ -11,7 +12,11 @@ namespace DiscordRPCCustom
 	public partial class MainForm : Form
 	{
 		private static DiscordRpcClient client;
+		private static DiscordRPC.Logging.LogLevel logLevel = DiscordRPC.Logging.LogLevel.Trace;
+		private static int discordPipe = -1;
 		private static bool isClientInitialized;
+		private static string currentApplicationID;
+		private static bool isChanged;
 		public MainForm()
 		{
 			//
@@ -29,15 +34,30 @@ namespace DiscordRPCCustom
 				checkBox1.Checked = bool.Parse(splittedRead[5]);
 				textBox6.Text = splittedRead[6];
 				textBox7.Text = splittedRead[7];
+				textBox8.Text = splittedRead[8];
+				//textBox9.Text = splittedRead[9];
+				textBox10.Text = splittedRead[10];
+				connectStartup();
+				//textBox11.Text = splittedRead[11];
 			}
+			RegistryKey rk = Registry.CurrentUser.OpenSubKey
+	            ("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+	
+			if (rk.GetValue("Simple Discord RPC", "No Path") != "No Path"){
+				checkBox2.Checked = true;
+			}
+	        
+	        rk.Close();
 			//
 			// TODO: Add constructor code after the InitializeComponent() call.
 			//
 		}
 		void Button1Click(object sender, EventArgs e)
 		{
-			if(!isClientInitialized){
-				client = new DiscordRpcClient(textBox1.Text);
+			if(!isClientInitialized || isChanged){
+				client = new DiscordRpcClient(textBox1.Text, pipe: discordPipe){
+                	Logger = new DiscordRPC.Logging.ConsoleLogger(logLevel, true)
+            	};
 				Assets assets = new Assets();
 				assets.LargeImageKey = textBox3.Text;
 				assets.LargeImageText = textBox5.Text;
@@ -47,16 +67,37 @@ namespace DiscordRPCCustom
 				richPresence.Details = textBox2.Text;
 				richPresence.State = textBox4.Text;
 				richPresence.Assets = assets;
+				DiscordRPC.Button buttons1 = new DiscordRPC.Button();
+				buttons1.Label = textBox8.Text;
+				buttons1.Url = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+				DiscordRPC.Button buttons2 = new DiscordRPC.Button();
+				buttons2.Label = textBox10.Text;
+				buttons2.Url = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+				if(textBox8.Text != null && textBox9.Text != null){
+					if(textBox10.Text != null && textBox11.Text != null){
+						richPresence.Buttons = new DiscordRPC.Button[]{buttons1, buttons2};
+					}
+				}
 				if(checkBox1.Checked){
 					richPresence.Timestamps = new Timestamps()
 					{
 						Start = DateTime.UtcNow
 					};
 				}
+				client.OnConnectionFailed += (senderi, msg) =>
+				{
+					label7.Text = "Connection failed : " + msg.ToString();
+				};
+				client.OnReady += (senderi, msg) =>
+				{
+					ChangeLabel("Discord RPC connected as : " + msg.User.Username + "#" +  msg.User.Discriminator);
+					pictureBox1.Load(msg.User.GetAvatarURL(User.AvatarFormat.PNG, User.AvatarSize.x32));
+				};
 				client.SetPresence(richPresence);
 				client.Initialize();
 				isClientInitialized = true;
-				label7.Text = "Discord RPC is running";
+				isChanged = false;
+				label7.Text = "Connecting to Discord RPC...";
 				button1.Text = "Update";
 			}else{
 				Assets assets = new Assets();
@@ -66,6 +107,17 @@ namespace DiscordRPCCustom
 				richPresence.Details = textBox2.Text;
 				richPresence.State = textBox4.Text;
 				richPresence.Assets = assets;
+				DiscordRPC.Button buttons1 = new DiscordRPC.Button();
+				buttons1.Label = textBox8.Text;
+				buttons1.Url = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+				DiscordRPC.Button buttons2 = new DiscordRPC.Button();
+				buttons2.Label = textBox10.Text;
+				buttons2.Url = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+				if(textBox8.Text != null && textBox9.Text != null){
+					if(textBox10.Text != null && textBox11.Text != null){
+						richPresence.Buttons = new DiscordRPC.Button[]{buttons1, buttons2};
+					}
+				}
 				if(checkBox1.Checked){
 					richPresence.Timestamps = new Timestamps()
 					{
@@ -74,8 +126,77 @@ namespace DiscordRPCCustom
 				}
 				client.SetPresence(richPresence);
 			}
-			string saveData = textBox1.Text + "|" + textBox2.Text + "|" + textBox3.Text + "|" + textBox4.Text + "|" + textBox5.Text + "|" + checkBox1.Checked.ToString() + "|" + textBox6.Text + "|" + textBox7.Text;
+			string[] separatedData = {
+				textBox1.Text,
+				"|",
+				textBox2.Text,
+				"|",
+				textBox3.Text,
+				"|",
+				textBox4.Text,
+				"|",
+				textBox5.Text,
+				"|",
+				checkBox1.Checked.ToString(),
+				"|",
+				textBox6.Text,
+				"|",
+				textBox7.Text,
+				"|",
+				textBox8.Text,
+				"|",
+				textBox9.Text,
+				"|",
+				textBox10.Text,
+				"|",
+				textBox11.Text
+			};
+			string saveData = String.Join("",separatedData);
 			File.WriteAllText("preferences.ini", saveData);
+		}
+		void connectStartup(){
+			client = new DiscordRpcClient(textBox1.Text, pipe: discordPipe, logger: new DiscordRPC.Logging.ConsoleLogger(logLevel, true), autoEvents: true,client: new DiscordRPC.IO.ManagedNamedPipeClient());
+			Assets assets = new Assets();
+			assets.LargeImageKey = textBox3.Text;
+			assets.LargeImageText = textBox5.Text;
+			assets.SmallImageKey = textBox7.Text;
+			assets.SmallImageText = textBox6.Text;
+			RichPresence richPresence = new RichPresence();
+			richPresence.Details = textBox2.Text;
+			richPresence.State = textBox4.Text;
+			richPresence.Assets = assets;
+			DiscordRPC.Button buttons1 = new DiscordRPC.Button();
+			buttons1.Label = textBox8.Text;
+			buttons1.Url = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+			DiscordRPC.Button buttons2 = new DiscordRPC.Button();
+			buttons2.Label = textBox10.Text;
+			buttons2.Url = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+			if(textBox8.Text != null && textBox9.Text != null){
+				if(textBox10.Text != null && textBox11.Text != null){
+					richPresence.Buttons = new DiscordRPC.Button[]{buttons1, buttons2};
+				}
+			}
+			if(checkBox1.Checked){
+				richPresence.Timestamps = new Timestamps()
+				{
+					Start = DateTime.UtcNow
+				};
+			}
+			client.OnConnectionFailed += (sender, msg) =>
+			{
+				ChangeLabel("Connection failed at : " + msg.FailedPipe);
+			};
+			client.OnReady += (sender, msg) =>
+			{
+				ChangeLabel("Discord RPC connected as : " + msg.User.Username + "#" + msg.User.Discriminator);
+				pictureBox1.Load(msg.User.GetAvatarURL(User.AvatarFormat.PNG, User.AvatarSize.x32));
+			};
+			client.SetPresence(richPresence);
+			client.Initialize();
+			isClientInitialized = true;
+			isChanged = false;
+			label7.Text = "Connecting to Discord RPC...";
+			button1.Text = "Update";
 		}
 		void NotifyIcon1MouseDoubleClick(object sender, MouseEventArgs e)
 		{
@@ -86,6 +207,9 @@ namespace DiscordRPCCustom
 		{
 			Hide();
 			notifyIcon1.Visible = true;
+		}
+		void ChangeLabel(string to){
+			label7.Text = to;
 		}
 		void Button3Click(object sender, EventArgs e)
 		{
@@ -99,6 +223,7 @@ namespace DiscordRPCCustom
 		[System.Runtime.InteropServices.DllImport("user32.dll")]
 		public static extern bool ReleaseCapture();
 		//this.MouseDown += this.MainForm_MouseDown;
+		//this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(MainForm_FormClosed);
 		private void MainForm_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
 		{     
 		    if (e.Button == MouseButtons.Left)
@@ -106,6 +231,31 @@ namespace DiscordRPCCustom
 		        ReleaseCapture();
 		        SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
 		    }
+		}
+		void TextBox1TextChanged(object sender, EventArgs e)
+		{
+			if(isClientInitialized){
+				if(textBox1.Text == currentApplicationID){
+					button1.Text = "Update";
+					isChanged = false;
+				}else{
+					button1.Text = "Connect";
+					isChanged = true;
+				}
+			}
+		}
+		void CheckBox2CheckedChanged(object sender, EventArgs e)
+		{
+	       	RegistryKey rk = Registry.CurrentUser.OpenSubKey
+	            ("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+	
+	        if (checkBox2.Checked)
+	            rk.SetValue("Simple Discord RPC", Application.ExecutablePath);
+	        else
+	            rk.DeleteValue("Simple Discord RPC",false);
+	        
+	        rk.Close();
+		
 		}
 	}
 }
