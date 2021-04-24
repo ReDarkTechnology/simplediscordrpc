@@ -17,6 +17,7 @@ namespace DiscordRPCCustom
 		private static bool isButtonEnabled;
 		private static bool isClientInitialized;
 		private static string currentApplicationID;
+		private static string savePath;
 		private static bool isChanged;
 		public MainForm()
 		{
@@ -24,8 +25,9 @@ namespace DiscordRPCCustom
 			// The InitializeComponent() call is required for Windows Forms designer support.
 			//
 			InitializeComponent();
-			if(File.Exists("preferences.ini")){
-				string fileRead = File.ReadAllText("preferences.ini");
+			savePath = "currentPreference.data";
+			if(File.Exists(savePath)){
+				string fileRead = File.ReadAllText(savePath);
 				string[] splittedRead = fileRead.Split(new char[] {'|'});
 				textBox1.Text = splittedRead[0];
 				textBox2.Text = splittedRead[1];
@@ -147,7 +149,7 @@ namespace DiscordRPCCustom
 				checkBox3.Checked.ToString()
 			};
 			string saveData = String.Join("",separatedData);
-			File.WriteAllText("preferences.ini", saveData);
+			File.WriteAllText(savePath, saveData);
 		}
 		private static bool nullDetect(object thing){
 			bool asDetect = false;

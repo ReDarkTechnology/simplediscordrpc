@@ -17,3 +17,12 @@ E:\Library\Opera\simplediscordrpc-1.1\DiscordRPCCustom\bin\Debug\DiscordRPCCusto
 E:\Library\Opera\simplediscordrpc-1.1\DiscordRPCCustom\bin\Debug\DiscordRPCCustom.exe
 E:\Library\Opera\simplediscordrpc-1.1\DiscordRPCCustom\bin\Debug\DiscordRPCCustom.pdb
 E:\Library\Opera\simplediscordrpc-1.1\DiscordRPCCustom\bin\Debug\Newtonsoft.Json.dll
+E:\GitHub\simplediscordrpc\DiscordRPCCustom\bin\Debug\DiscordRPCCustom.exe.config
+E:\GitHub\simplediscordrpc\DiscordRPCCustom\bin\Debug\DiscordRPCCustom.exe
+E:\GitHub\simplediscordrpc\DiscordRPCCustom\bin\Debug\DiscordRPCCustom.pdb
+E:\GitHub\simplediscordrpc\DiscordRPCCustom\bin\Debug\Newtonsoft.Json.dll
+E:\GitHub\simplediscordrpc\DiscordRPCCustom\obj\Debug\DiscordRPCCustom.csprojResolveAssemblyReference.cache
+E:\GitHub\simplediscordrpc\DiscordRPCCustom\obj\Debug\DiscordRPCCustom.MainForm.resources
+E:\GitHub\simplediscordrpc\DiscordRPCCustom\obj\Debug\DiscordRPCCustom.csproj.GenerateResource.Cache
+E:\GitHub\simplediscordrpc\DiscordRPCCustom\obj\Debug\DiscordRPCCustom.exe
+E:\GitHub\simplediscordrpc\DiscordRPCCustom\obj\Debug\DiscordRPCCustom.pdb
