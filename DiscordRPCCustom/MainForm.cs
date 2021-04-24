@@ -14,6 +14,7 @@ namespace DiscordRPCCustom
 		private static DiscordRpcClient client;
 		private static DiscordRPC.Logging.LogLevel logLevel = DiscordRPC.Logging.LogLevel.Trace;
 		private static int discordPipe = -1;
+		private static bool isButtonEnabled;
 		private static bool isClientInitialized;
 		private static string currentApplicationID;
 		private static bool isChanged;
@@ -35,10 +36,14 @@ namespace DiscordRPCCustom
 				textBox6.Text = splittedRead[6];
 				textBox7.Text = splittedRead[7];
 				textBox8.Text = splittedRead[8];
-				//textBox9.Text = splittedRead[9];
+				textBox9.Text = splittedRead[9];
 				textBox10.Text = splittedRead[10];
+				bool setUp = bool.Parse(splittedRead[12]);
+				checkBox3.Checked = setUp;
+				isButtonEnabled = setUp;
+				ButtonGroupChange(setUp);
 				connectStartup();
-				//textBox11.Text = splittedRead[11];
+				textBox11.Text = splittedRead[11];
 			}
 			RegistryKey rk = Registry.CurrentUser.OpenSubKey
 	            ("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
@@ -67,16 +72,10 @@ namespace DiscordRPCCustom
 				richPresence.Details = textBox2.Text;
 				richPresence.State = textBox4.Text;
 				richPresence.Assets = assets;
-				DiscordRPC.Button buttons1 = new DiscordRPC.Button();
-				buttons1.Label = textBox8.Text;
-				buttons1.Url = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
-				DiscordRPC.Button buttons2 = new DiscordRPC.Button();
-				buttons2.Label = textBox10.Text;
-				buttons2.Url = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
-				if(textBox8.Text != null && textBox9.Text != null){
-					if(textBox10.Text != null && textBox11.Text != null){
-						richPresence.Buttons = new DiscordRPC.Button[]{buttons1, buttons2};
-					}
+				DiscordRPC.Button buttons1 = MakeButton(textBox8.Text, textBox9.Text);
+				DiscordRPC.Button buttons2 = MakeButton(textBox10.Text, textBox11.Text);
+				if(isButtonEnabled){
+					richPresence.Buttons = new DiscordRPC.Button[]{buttons1, buttons2};
 				}
 				if(checkBox1.Checked){
 					richPresence.Timestamps = new Timestamps()
@@ -107,16 +106,10 @@ namespace DiscordRPCCustom
 				richPresence.Details = textBox2.Text;
 				richPresence.State = textBox4.Text;
 				richPresence.Assets = assets;
-				DiscordRPC.Button buttons1 = new DiscordRPC.Button();
-				buttons1.Label = textBox8.Text;
-				buttons1.Url = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
-				DiscordRPC.Button buttons2 = new DiscordRPC.Button();
-				buttons2.Label = textBox10.Text;
-				buttons2.Url = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
-				if(textBox8.Text != null && textBox9.Text != null){
-					if(textBox10.Text != null && textBox11.Text != null){
-						richPresence.Buttons = new DiscordRPC.Button[]{buttons1, buttons2};
-					}
+				DiscordRPC.Button buttons1 = MakeButton(textBox8.Text, textBox9.Text);
+				DiscordRPC.Button buttons2 = MakeButton(textBox10.Text, textBox11.Text);
+				if(isButtonEnabled){
+					richPresence.Buttons = new DiscordRPC.Button[]{buttons1, buttons2};
 				}
 				if(checkBox1.Checked){
 					richPresence.Timestamps = new Timestamps()
@@ -149,10 +142,19 @@ namespace DiscordRPCCustom
 				"|",
 				textBox10.Text,
 				"|",
-				textBox11.Text
+				textBox11.Text,
+				"|",
+				checkBox3.Checked.ToString()
 			};
 			string saveData = String.Join("",separatedData);
 			File.WriteAllText("preferences.ini", saveData);
+		}
+		private static bool nullDetect(object thing){
+			bool asDetect = false;
+			if(thing == null){
+				asDetect = true;
+			}
+			return asDetect;
 		}
 		void connectStartup(){
 			client = new DiscordRpcClient(textBox1.Text, pipe: discordPipe, logger: new DiscordRPC.Logging.ConsoleLogger(logLevel, true), autoEvents: true,client: new DiscordRPC.IO.ManagedNamedPipeClient());
@@ -165,16 +167,10 @@ namespace DiscordRPCCustom
 			richPresence.Details = textBox2.Text;
 			richPresence.State = textBox4.Text;
 			richPresence.Assets = assets;
-			DiscordRPC.Button buttons1 = new DiscordRPC.Button();
-			buttons1.Label = textBox8.Text;
-			buttons1.Url = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
-			DiscordRPC.Button buttons2 = new DiscordRPC.Button();
-			buttons2.Label = textBox10.Text;
-			buttons2.Url = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
-			if(textBox8.Text != null && textBox9.Text != null){
-				if(textBox10.Text != null && textBox11.Text != null){
-					richPresence.Buttons = new DiscordRPC.Button[]{buttons1, buttons2};
-				}
+			DiscordRPC.Button buttons1 = MakeButton(textBox8.Text, textBox9.Text);
+			DiscordRPC.Button buttons2 = MakeButton(textBox10.Text, textBox11.Text);
+			if(isButtonEnabled){
+				richPresence.Buttons = new DiscordRPC.Button[]{buttons1, buttons2};
 			}
 			if(checkBox1.Checked){
 				richPresence.Timestamps = new Timestamps()
@@ -191,6 +187,7 @@ namespace DiscordRPCCustom
 				ChangeLabel("Discord RPC connected as : " + msg.User.Username + "#" + msg.User.Discriminator);
 				pictureBox1.Load(msg.User.GetAvatarURL(User.AvatarFormat.PNG, User.AvatarSize.x32));
 			};
+			currentApplicationID = textBox1.Text;
 			client.SetPresence(richPresence);
 			client.Initialize();
 			isClientInitialized = true;
@@ -256,6 +253,55 @@ namespace DiscordRPCCustom
 	        
 	        rk.Close();
 		
+		}
+		void Button4Click(object sender, EventArgs e)
+		{
+			panel1.Visible = true;
+			panel2.Visible = false;
+		}
+		void Button5Click(object sender, EventArgs e)
+		{
+			panel1.Visible = false;
+			panel2.Visible = true;
+		}
+		void CheckBox3CheckedChanged(object sender, EventArgs e)
+		{
+			isButtonEnabled = checkBox3.Checked;
+			ButtonGroupChange(checkBox3.Checked);
+		}
+		void ButtonGroupChange(bool to){
+			textBox8.ReadOnly = !to;
+			textBox9.ReadOnly = !to;
+			textBox10.ReadOnly = !to;
+			textBox11.ReadOnly = !to;
+		}
+		public DiscordRPC.Button MakeButton(string label, string url){
+			DiscordRPC.Button xyz = new DiscordRPC.Button();
+			xyz.Label = label;
+			if(Uri.IsWellFormedUriString(url, UriKind.Absolute)){
+				xyz.Url = url;
+			}else{
+				xyz.Url = "https://pastebin.com/raw/N1YKnQHP";
+			}
+			return xyz;
+		}
+		void TextBox11TextChanged(object sender, EventArgs e)
+		{
+			string url = textBox11.Text;
+			if(Uri.IsWellFormedUriString(url, UriKind.Absolute)){
+				label18.Text = "This is URI verified.";
+			}else{
+				label18.Text = "This is not an URI";
+			}
+		}
+		void TextBox9TextChanged(object sender, EventArgs e)
+		{
+			string url = textBox9.Text;
+			if(Uri.IsWellFormedUriString(url, UriKind.Absolute)){
+				label18.Text = "This is URI verified.";
+			}else{
+				label18.Text = "This is not an URI";
+			}
 		}
 	}
 }

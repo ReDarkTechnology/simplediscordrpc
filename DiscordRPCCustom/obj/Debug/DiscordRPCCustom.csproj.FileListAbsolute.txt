@@ -8,3 +8,12 @@ C:\Users\Another sign option\Documents\SharpDevelop Projects\DiscordRPCCustom\Di
 C:\Users\Another sign option\Documents\SharpDevelop Projects\DiscordRPCCustom\DiscordRPCCustom\obj\Debug\DiscordRPCCustom.csproj.GenerateResource.Cache
 C:\Users\Another sign option\Documents\SharpDevelop Projects\DiscordRPCCustom\DiscordRPCCustom\obj\Debug\DiscordRPCCustom.exe
 C:\Users\Another sign option\Documents\SharpDevelop Projects\DiscordRPCCustom\DiscordRPCCustom\obj\Debug\DiscordRPCCustom.pdb
+E:\Library\Opera\simplediscordrpc-1.1\DiscordRPCCustom\obj\Debug\DiscordRPCCustom.csprojResolveAssemblyReference.cache
+E:\Library\Opera\simplediscordrpc-1.1\DiscordRPCCustom\obj\Debug\DiscordRPCCustom.MainForm.resources
+E:\Library\Opera\simplediscordrpc-1.1\DiscordRPCCustom\obj\Debug\DiscordRPCCustom.csproj.GenerateResource.Cache
+E:\Library\Opera\simplediscordrpc-1.1\DiscordRPCCustom\obj\Debug\DiscordRPCCustom.exe
+E:\Library\Opera\simplediscordrpc-1.1\DiscordRPCCustom\obj\Debug\DiscordRPCCustom.pdb
+E:\Library\Opera\simplediscordrpc-1.1\DiscordRPCCustom\bin\Debug\DiscordRPCCustom.exe.config
+E:\Library\Opera\simplediscordrpc-1.1\DiscordRPCCustom\bin\Debug\DiscordRPCCustom.exe
+E:\Library\Opera\simplediscordrpc-1.1\DiscordRPCCustom\bin\Debug\DiscordRPCCustom.pdb
+E:\Library\Opera\simplediscordrpc-1.1\DiscordRPCCustom\bin\Debug\Newtonsoft.Json.dll

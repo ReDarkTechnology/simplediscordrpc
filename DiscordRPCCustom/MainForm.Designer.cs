@@ -48,6 +48,13 @@ namespace DiscordRPCCustom
 		private System.Windows.Forms.Label label16;
 		private System.Windows.Forms.PictureBox pictureBox1;
 		private System.Windows.Forms.CheckBox checkBox2;
+		private System.Windows.Forms.Panel panel1;
+		private System.Windows.Forms.Button button4;
+		private System.Windows.Forms.Button button5;
+		private System.Windows.Forms.Panel panel2;
+		private System.Windows.Forms.CheckBox checkBox3;
+		private System.Windows.Forms.Label label17;
+		private System.Windows.Forms.Label label18;
 		
 		/// <summary>
 		/// Disposes resources used by the form.
@@ -107,7 +114,16 @@ namespace DiscordRPCCustom
 			this.label16 = new System.Windows.Forms.Label();
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.checkBox2 = new System.Windows.Forms.CheckBox();
+			this.panel1 = new System.Windows.Forms.Panel();
+			this.panel2 = new System.Windows.Forms.Panel();
+			this.label18 = new System.Windows.Forms.Label();
+			this.checkBox3 = new System.Windows.Forms.CheckBox();
+			this.label17 = new System.Windows.Forms.Label();
+			this.button4 = new System.Windows.Forms.Button();
+			this.button5 = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+			this.panel1.SuspendLayout();
+			this.panel2.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -124,7 +140,7 @@ namespace DiscordRPCCustom
 			// label2
 			// 
 			this.label2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-			this.label2.Location = new System.Drawing.Point(13, 40);
+			this.label2.Location = new System.Drawing.Point(5, 6);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(74, 14);
 			this.label2.TabIndex = 1;
@@ -134,7 +150,7 @@ namespace DiscordRPCCustom
 			// 
 			this.textBox1.BackColor = System.Drawing.SystemColors.WindowFrame;
 			this.textBox1.ForeColor = System.Drawing.SystemColors.Window;
-			this.textBox1.Location = new System.Drawing.Point(93, 37);
+			this.textBox1.Location = new System.Drawing.Point(85, 3);
 			this.textBox1.Name = "textBox1";
 			this.textBox1.PasswordChar = '*';
 			this.textBox1.Size = new System.Drawing.Size(276, 20);
@@ -144,7 +160,7 @@ namespace DiscordRPCCustom
 			// label3
 			// 
 			this.label3.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-			this.label3.Location = new System.Drawing.Point(13, 63);
+			this.label3.Location = new System.Drawing.Point(5, 29);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(74, 14);
 			this.label3.TabIndex = 3;
@@ -154,7 +170,7 @@ namespace DiscordRPCCustom
 			// 
 			this.textBox2.BackColor = System.Drawing.SystemColors.WindowFrame;
 			this.textBox2.ForeColor = System.Drawing.SystemColors.Window;
-			this.textBox2.Location = new System.Drawing.Point(93, 60);
+			this.textBox2.Location = new System.Drawing.Point(85, 26);
 			this.textBox2.Name = "textBox2";
 			this.textBox2.Size = new System.Drawing.Size(276, 20);
 			this.textBox2.TabIndex = 4;
@@ -163,7 +179,7 @@ namespace DiscordRPCCustom
 			// 
 			this.textBox3.BackColor = System.Drawing.SystemColors.WindowFrame;
 			this.textBox3.ForeColor = System.Drawing.SystemColors.Window;
-			this.textBox3.Location = new System.Drawing.Point(93, 108);
+			this.textBox3.Location = new System.Drawing.Point(85, 74);
 			this.textBox3.Name = "textBox3";
 			this.textBox3.Size = new System.Drawing.Size(276, 20);
 			this.textBox3.TabIndex = 5;
@@ -172,7 +188,7 @@ namespace DiscordRPCCustom
 			// 
 			this.textBox4.BackColor = System.Drawing.SystemColors.WindowFrame;
 			this.textBox4.ForeColor = System.Drawing.SystemColors.Window;
-			this.textBox4.Location = new System.Drawing.Point(93, 84);
+			this.textBox4.Location = new System.Drawing.Point(85, 50);
 			this.textBox4.Name = "textBox4";
 			this.textBox4.Size = new System.Drawing.Size(276, 20);
 			this.textBox4.TabIndex = 5;
@@ -180,7 +196,7 @@ namespace DiscordRPCCustom
 			// label4
 			// 
 			this.label4.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-			this.label4.Location = new System.Drawing.Point(13, 87);
+			this.label4.Location = new System.Drawing.Point(5, 53);
 			this.label4.Name = "label4";
 			this.label4.Size = new System.Drawing.Size(74, 14);
 			this.label4.TabIndex = 6;
@@ -189,7 +205,7 @@ namespace DiscordRPCCustom
 			// label5
 			// 
 			this.label5.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-			this.label5.Location = new System.Drawing.Point(13, 111);
+			this.label5.Location = new System.Drawing.Point(5, 77);
 			this.label5.Name = "label5";
 			this.label5.Size = new System.Drawing.Size(74, 14);
 			this.label5.TabIndex = 7;
@@ -198,7 +214,7 @@ namespace DiscordRPCCustom
 			// label6
 			// 
 			this.label6.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-			this.label6.Location = new System.Drawing.Point(13, 135);
+			this.label6.Location = new System.Drawing.Point(5, 101);
 			this.label6.Name = "label6";
 			this.label6.Size = new System.Drawing.Size(74, 14);
 			this.label6.TabIndex = 9;
@@ -208,7 +224,7 @@ namespace DiscordRPCCustom
 			// 
 			this.textBox5.BackColor = System.Drawing.SystemColors.WindowFrame;
 			this.textBox5.ForeColor = System.Drawing.SystemColors.Window;
-			this.textBox5.Location = new System.Drawing.Point(93, 132);
+			this.textBox5.Location = new System.Drawing.Point(85, 98);
 			this.textBox5.Name = "textBox5";
 			this.textBox5.Size = new System.Drawing.Size(276, 20);
 			this.textBox5.TabIndex = 8;
@@ -216,7 +232,7 @@ namespace DiscordRPCCustom
 			// label7
 			// 
 			this.label7.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-			this.label7.Location = new System.Drawing.Point(51, 378);
+			this.label7.Location = new System.Drawing.Point(51, 257);
 			this.label7.Name = "label7";
 			this.label7.Size = new System.Drawing.Size(237, 32);
 			this.label7.TabIndex = 10;
@@ -226,7 +242,7 @@ namespace DiscordRPCCustom
 			// 
 			this.button1.BackColor = System.Drawing.SystemColors.Control;
 			this.button1.ForeColor = System.Drawing.SystemColors.ControlText;
-			this.button1.Location = new System.Drawing.Point(294, 387);
+			this.button1.Location = new System.Drawing.Point(294, 266);
 			this.button1.Name = "button1";
 			this.button1.Size = new System.Drawing.Size(75, 23);
 			this.button1.TabIndex = 11;
@@ -236,7 +252,7 @@ namespace DiscordRPCCustom
 			// 
 			// checkBox1
 			// 
-			this.checkBox1.Location = new System.Drawing.Point(93, 152);
+			this.checkBox1.Location = new System.Drawing.Point(85, 118);
 			this.checkBox1.Name = "checkBox1";
 			this.checkBox1.Size = new System.Drawing.Size(23, 24);
 			this.checkBox1.TabIndex = 12;
@@ -245,7 +261,7 @@ namespace DiscordRPCCustom
 			// label8
 			// 
 			this.label8.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-			this.label8.Location = new System.Drawing.Point(13, 157);
+			this.label8.Location = new System.Drawing.Point(5, 123);
 			this.label8.Name = "label8";
 			this.label8.Size = new System.Drawing.Size(74, 14);
 			this.label8.TabIndex = 13;
@@ -285,7 +301,7 @@ namespace DiscordRPCCustom
 			// label9
 			// 
 			this.label9.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-			this.label9.Location = new System.Drawing.Point(13, 202);
+			this.label9.Location = new System.Drawing.Point(5, 168);
 			this.label9.Name = "label9";
 			this.label9.Size = new System.Drawing.Size(74, 14);
 			this.label9.TabIndex = 17;
@@ -295,7 +311,7 @@ namespace DiscordRPCCustom
 			// 
 			this.textBox6.BackColor = System.Drawing.SystemColors.WindowFrame;
 			this.textBox6.ForeColor = System.Drawing.SystemColors.Window;
-			this.textBox6.Location = new System.Drawing.Point(93, 199);
+			this.textBox6.Location = new System.Drawing.Point(85, 165);
 			this.textBox6.Name = "textBox6";
 			this.textBox6.Size = new System.Drawing.Size(276, 20);
 			this.textBox6.TabIndex = 16;
@@ -303,7 +319,7 @@ namespace DiscordRPCCustom
 			// label10
 			// 
 			this.label10.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-			this.label10.Location = new System.Drawing.Point(13, 179);
+			this.label10.Location = new System.Drawing.Point(5, 145);
 			this.label10.Name = "label10";
 			this.label10.Size = new System.Drawing.Size(74, 14);
 			this.label10.TabIndex = 19;
@@ -313,7 +329,7 @@ namespace DiscordRPCCustom
 			// 
 			this.textBox7.BackColor = System.Drawing.SystemColors.WindowFrame;
 			this.textBox7.ForeColor = System.Drawing.SystemColors.Window;
-			this.textBox7.Location = new System.Drawing.Point(93, 176);
+			this.textBox7.Location = new System.Drawing.Point(85, 142);
 			this.textBox7.Name = "textBox7";
 			this.textBox7.Size = new System.Drawing.Size(276, 20);
 			this.textBox7.TabIndex = 18;
@@ -322,7 +338,7 @@ namespace DiscordRPCCustom
 			// 
 			this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
 			this.label11.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-			this.label11.Location = new System.Drawing.Point(13, 229);
+			this.label11.Location = new System.Drawing.Point(3, 29);
 			this.label11.Name = "label11";
 			this.label11.Size = new System.Drawing.Size(103, 21);
 			this.label11.TabIndex = 20;
@@ -331,7 +347,7 @@ namespace DiscordRPCCustom
 			// label12
 			// 
 			this.label12.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-			this.label12.Location = new System.Drawing.Point(13, 256);
+			this.label12.Location = new System.Drawing.Point(3, 56);
 			this.label12.Name = "label12";
 			this.label12.Size = new System.Drawing.Size(74, 14);
 			this.label12.TabIndex = 24;
@@ -341,15 +357,16 @@ namespace DiscordRPCCustom
 			// 
 			this.textBox8.BackColor = System.Drawing.SystemColors.WindowFrame;
 			this.textBox8.ForeColor = System.Drawing.SystemColors.Window;
-			this.textBox8.Location = new System.Drawing.Point(93, 253);
+			this.textBox8.Location = new System.Drawing.Point(83, 53);
 			this.textBox8.Name = "textBox8";
+			this.textBox8.ReadOnly = true;
 			this.textBox8.Size = new System.Drawing.Size(276, 20);
 			this.textBox8.TabIndex = 23;
 			// 
 			// label13
 			// 
 			this.label13.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-			this.label13.Location = new System.Drawing.Point(13, 279);
+			this.label13.Location = new System.Drawing.Point(3, 79);
 			this.label13.Name = "label13";
 			this.label13.Size = new System.Drawing.Size(74, 14);
 			this.label13.TabIndex = 22;
@@ -358,18 +375,18 @@ namespace DiscordRPCCustom
 			// textBox9
 			// 
 			this.textBox9.BackColor = System.Drawing.SystemColors.WindowFrame;
-			this.textBox9.ForeColor = System.Drawing.SystemColors.ControlDark;
-			this.textBox9.Location = new System.Drawing.Point(93, 276);
+			this.textBox9.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+			this.textBox9.Location = new System.Drawing.Point(83, 76);
 			this.textBox9.Name = "textBox9";
 			this.textBox9.ReadOnly = true;
 			this.textBox9.Size = new System.Drawing.Size(276, 20);
 			this.textBox9.TabIndex = 21;
-			this.textBox9.Text = "Disabled";
+			this.textBox9.TextChanged += new System.EventHandler(this.TextBox9TextChanged);
 			// 
 			// label14
 			// 
 			this.label14.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-			this.label14.Location = new System.Drawing.Point(13, 327);
+			this.label14.Location = new System.Drawing.Point(3, 127);
 			this.label14.Name = "label14";
 			this.label14.Size = new System.Drawing.Size(74, 14);
 			this.label14.TabIndex = 29;
@@ -379,15 +396,16 @@ namespace DiscordRPCCustom
 			// 
 			this.textBox10.BackColor = System.Drawing.SystemColors.WindowFrame;
 			this.textBox10.ForeColor = System.Drawing.SystemColors.Window;
-			this.textBox10.Location = new System.Drawing.Point(93, 324);
+			this.textBox10.Location = new System.Drawing.Point(83, 124);
 			this.textBox10.Name = "textBox10";
+			this.textBox10.ReadOnly = true;
 			this.textBox10.Size = new System.Drawing.Size(276, 20);
 			this.textBox10.TabIndex = 28;
 			// 
 			// label15
 			// 
 			this.label15.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-			this.label15.Location = new System.Drawing.Point(13, 350);
+			this.label15.Location = new System.Drawing.Point(3, 150);
 			this.label15.Name = "label15";
 			this.label15.Size = new System.Drawing.Size(74, 14);
 			this.label15.TabIndex = 27;
@@ -396,19 +414,19 @@ namespace DiscordRPCCustom
 			// textBox11
 			// 
 			this.textBox11.BackColor = System.Drawing.SystemColors.WindowFrame;
-			this.textBox11.ForeColor = System.Drawing.SystemColors.ControlDark;
-			this.textBox11.Location = new System.Drawing.Point(93, 347);
+			this.textBox11.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+			this.textBox11.Location = new System.Drawing.Point(83, 147);
 			this.textBox11.Name = "textBox11";
 			this.textBox11.ReadOnly = true;
 			this.textBox11.Size = new System.Drawing.Size(276, 20);
 			this.textBox11.TabIndex = 26;
-			this.textBox11.Text = "Disabled";
+			this.textBox11.TextChanged += new System.EventHandler(this.TextBox11TextChanged);
 			// 
 			// label16
 			// 
 			this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
 			this.label16.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-			this.label16.Location = new System.Drawing.Point(13, 300);
+			this.label16.Location = new System.Drawing.Point(3, 100);
 			this.label16.Name = "label16";
 			this.label16.Size = new System.Drawing.Size(103, 21);
 			this.label16.TabIndex = 25;
@@ -416,7 +434,7 @@ namespace DiscordRPCCustom
 			// 
 			// pictureBox1
 			// 
-			this.pictureBox1.Location = new System.Drawing.Point(13, 378);
+			this.pictureBox1.Location = new System.Drawing.Point(13, 257);
 			this.pictureBox1.Name = "pictureBox1";
 			this.pictureBox1.Size = new System.Drawing.Size(32, 32);
 			this.pictureBox1.TabIndex = 30;
@@ -425,7 +443,7 @@ namespace DiscordRPCCustom
 			// checkBox2
 			// 
 			this.checkBox2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-			this.checkBox2.Location = new System.Drawing.Point(294, 371);
+			this.checkBox2.Location = new System.Drawing.Point(288, 191);
 			this.checkBox2.Name = "checkBox2";
 			this.checkBox2.Size = new System.Drawing.Size(74, 15);
 			this.checkBox2.TabIndex = 31;
@@ -433,45 +451,118 @@ namespace DiscordRPCCustom
 			this.checkBox2.UseVisualStyleBackColor = true;
 			this.checkBox2.CheckedChanged += new System.EventHandler(this.CheckBox2CheckedChanged);
 			// 
+			// panel1
+			// 
+			this.panel1.Controls.Add(this.textBox1);
+			this.panel1.Controls.Add(this.checkBox2);
+			this.panel1.Controls.Add(this.label2);
+			this.panel1.Controls.Add(this.label3);
+			this.panel1.Controls.Add(this.textBox2);
+			this.panel1.Controls.Add(this.textBox3);
+			this.panel1.Controls.Add(this.textBox4);
+			this.panel1.Controls.Add(this.label4);
+			this.panel1.Controls.Add(this.label5);
+			this.panel1.Controls.Add(this.textBox5);
+			this.panel1.Controls.Add(this.label6);
+			this.panel1.Controls.Add(this.checkBox1);
+			this.panel1.Controls.Add(this.label10);
+			this.panel1.Controls.Add(this.label8);
+			this.panel1.Controls.Add(this.textBox7);
+			this.panel1.Controls.Add(this.textBox6);
+			this.panel1.Controls.Add(this.label9);
+			this.panel1.Location = new System.Drawing.Point(12, 55);
+			this.panel1.Name = "panel1";
+			this.panel1.Size = new System.Drawing.Size(365, 190);
+			this.panel1.TabIndex = 32;
+			// 
+			// panel2
+			// 
+			this.panel2.Controls.Add(this.label18);
+			this.panel2.Controls.Add(this.checkBox3);
+			this.panel2.Controls.Add(this.label11);
+			this.panel2.Controls.Add(this.label17);
+			this.panel2.Controls.Add(this.textBox9);
+			this.panel2.Controls.Add(this.label13);
+			this.panel2.Controls.Add(this.textBox8);
+			this.panel2.Controls.Add(this.label12);
+			this.panel2.Controls.Add(this.label14);
+			this.panel2.Controls.Add(this.label16);
+			this.panel2.Controls.Add(this.textBox11);
+			this.panel2.Controls.Add(this.textBox10);
+			this.panel2.Controls.Add(this.label15);
+			this.panel2.Location = new System.Drawing.Point(12, 54);
+			this.panel2.Name = "panel2";
+			this.panel2.Size = new System.Drawing.Size(365, 191);
+			this.panel2.TabIndex = 35;
+			this.panel2.Visible = false;
+			// 
+			// label18
+			// 
+			this.label18.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+			this.label18.Location = new System.Drawing.Point(3, 172);
+			this.label18.Name = "label18";
+			this.label18.Size = new System.Drawing.Size(352, 14);
+			this.label18.TabIndex = 34;
+			this.label18.Text = "URI Verify";
+			// 
+			// checkBox3
+			// 
+			this.checkBox3.Location = new System.Drawing.Point(83, 4);
+			this.checkBox3.Name = "checkBox3";
+			this.checkBox3.Size = new System.Drawing.Size(23, 24);
+			this.checkBox3.TabIndex = 32;
+			this.checkBox3.UseVisualStyleBackColor = true;
+			this.checkBox3.CheckedChanged += new System.EventHandler(this.CheckBox3CheckedChanged);
+			// 
+			// label17
+			// 
+			this.label17.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+			this.label17.Location = new System.Drawing.Point(3, 9);
+			this.label17.Name = "label17";
+			this.label17.Size = new System.Drawing.Size(94, 14);
+			this.label17.TabIndex = 33;
+			this.label17.Text = "Enable Buttons";
+			// 
+			// button4
+			// 
+			this.button4.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+			this.button4.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+			this.button4.Location = new System.Drawing.Point(12, 36);
+			this.button4.Name = "button4";
+			this.button4.Size = new System.Drawing.Size(48, 23);
+			this.button4.TabIndex = 33;
+			this.button4.Text = "Basics";
+			this.button4.UseVisualStyleBackColor = false;
+			this.button4.Click += new System.EventHandler(this.Button4Click);
+			// 
+			// button5
+			// 
+			this.button5.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+			this.button5.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+			this.button5.Location = new System.Drawing.Point(58, 36);
+			this.button5.Name = "button5";
+			this.button5.Size = new System.Drawing.Size(51, 23);
+			this.button5.TabIndex = 34;
+			this.button5.Text = "Buttons";
+			this.button5.UseVisualStyleBackColor = false;
+			this.button5.Click += new System.EventHandler(this.Button5Click);
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-			this.ClientSize = new System.Drawing.Size(380, 421);
-			this.Controls.Add(this.checkBox2);
-			this.Controls.Add(this.pictureBox1);
-			this.Controls.Add(this.label14);
-			this.Controls.Add(this.textBox10);
-			this.Controls.Add(this.label15);
-			this.Controls.Add(this.textBox11);
-			this.Controls.Add(this.label16);
-			this.Controls.Add(this.label12);
-			this.Controls.Add(this.textBox8);
-			this.Controls.Add(this.label13);
-			this.Controls.Add(this.textBox9);
-			this.Controls.Add(this.label11);
-			this.Controls.Add(this.label10);
-			this.Controls.Add(this.textBox7);
-			this.Controls.Add(this.label9);
-			this.Controls.Add(this.textBox6);
+			this.ClientSize = new System.Drawing.Size(388, 301);
+			this.Controls.Add(this.panel2);
+			this.Controls.Add(this.panel1);
 			this.Controls.Add(this.button3);
+			this.Controls.Add(this.pictureBox1);
 			this.Controls.Add(this.button2);
-			this.Controls.Add(this.label8);
-			this.Controls.Add(this.checkBox1);
+			this.Controls.Add(this.label1);
+			this.Controls.Add(this.button4);
+			this.Controls.Add(this.button5);
 			this.Controls.Add(this.button1);
 			this.Controls.Add(this.label7);
-			this.Controls.Add(this.label6);
-			this.Controls.Add(this.textBox5);
-			this.Controls.Add(this.label5);
-			this.Controls.Add(this.label4);
-			this.Controls.Add(this.textBox4);
-			this.Controls.Add(this.textBox3);
-			this.Controls.Add(this.textBox2);
-			this.Controls.Add(this.label3);
-			this.Controls.Add(this.textBox1);
-			this.Controls.Add(this.label2);
-			this.Controls.Add(this.label1);
 			this.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -479,8 +570,11 @@ namespace DiscordRPCCustom
 			this.Text = "Discord Rich Presence";
 			this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseDown);
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+			this.panel1.ResumeLayout(false);
+			this.panel1.PerformLayout();
+			this.panel2.ResumeLayout(false);
+			this.panel2.PerformLayout();
 			this.ResumeLayout(false);
-			this.PerformLayout();
 
 		}
 	}
