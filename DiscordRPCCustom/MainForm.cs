@@ -19,13 +19,22 @@ namespace DiscordRPCCustom
 		private static string currentApplicationID;
 		private static string savePath;
 		private static bool isChanged;
+		private static DateTime startTime;
+		private static DateTime offsetStamp;
 		public MainForm()
 		{
 			//
 			// The InitializeComponent() call is required for Windows Forms designer support.
 			//
 			InitializeComponent();
+			startTime = DateTime.UtcNow;
 			savePath = "currentPreference.data";
+			textBox13.Text = "00:00:00";
+			//--------------------
+			panel1.Visible = true;
+			panel2.Visible = false;
+			panel3.Visible = false;
+			//--------------------
 			if(File.Exists(savePath)){
 				string fileRead = File.ReadAllText(savePath);
 				string[] splittedRead = fileRead.Split(new char[] {'|'});
@@ -46,6 +55,15 @@ namespace DiscordRPCCustom
 				ButtonGroupChange(setUp);
 				connectStartup();
 				textBox11.Text = splittedRead[11];
+				if(splittedRead.Length > 12){
+					try{
+						offsetStamp = DateTime.Parse(splittedRead[13]);
+						textBox13.Text = splittedRead[13];
+					}catch (Exception ex){
+						textBox13.Text = "00:00:00";
+						//MessageBox.Show("Timestamp Offset broke : " + ex.ToString(), "Warning!");
+					}
+				}
 			}
 			RegistryKey rk = Registry.CurrentUser.OpenSubKey
 	            ("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
@@ -82,12 +100,14 @@ namespace DiscordRPCCustom
 				if(checkBox1.Checked){
 					richPresence.Timestamps = new Timestamps()
 					{
-						Start = DateTime.UtcNow
+						Start = startTime.Add(offsetStamp.TimeOfDay)
 					};
 				}
 				client.OnConnectionFailed += (senderi, msg) =>
 				{
 					label7.Text = "Connection failed : " + msg.ToString();
+					button1.Text = "Connect";
+					isClientInitialized = false;
 				};
 				client.OnReady += (senderi, msg) =>
 				{
@@ -104,6 +124,8 @@ namespace DiscordRPCCustom
 				Assets assets = new Assets();
 				assets.LargeImageKey = textBox3.Text;
 				assets.LargeImageText = textBox5.Text;
+				assets.SmallImageKey = textBox7.Text;
+				assets.SmallImageText = textBox6.Text;
 				RichPresence richPresence = new RichPresence();
 				richPresence.Details = textBox2.Text;
 				richPresence.State = textBox4.Text;
@@ -116,7 +138,7 @@ namespace DiscordRPCCustom
 				if(checkBox1.Checked){
 					richPresence.Timestamps = new Timestamps()
 					{
-						Start = DateTime.UtcNow
+						Start = startTime.Add(-offsetStamp.TimeOfDay)
 					};
 				}
 				client.SetPresence(richPresence);
@@ -146,7 +168,9 @@ namespace DiscordRPCCustom
 				"|",
 				textBox11.Text,
 				"|",
-				checkBox3.Checked.ToString()
+				checkBox3.Checked.ToString(),
+				"|",
+				textBox13.Text
 			};
 			string saveData = String.Join("",separatedData);
 			File.WriteAllText(savePath, saveData);
@@ -177,12 +201,14 @@ namespace DiscordRPCCustom
 			if(checkBox1.Checked){
 				richPresence.Timestamps = new Timestamps()
 				{
-					Start = DateTime.UtcNow
+					Start = startTime.Add(-offsetStamp.TimeOfDay)
 				};
 			}
 			client.OnConnectionFailed += (sender, msg) =>
 			{
 				ChangeLabel("Connection failed at : " + msg.FailedPipe);
+				button1.Text = "Connect";
+				isClientInitialized = false;
 			};
 			client.OnReady += (sender, msg) =>
 			{
@@ -260,11 +286,13 @@ namespace DiscordRPCCustom
 		{
 			panel1.Visible = true;
 			panel2.Visible = false;
+			panel3.Visible = false;
 		}
 		void Button5Click(object sender, EventArgs e)
 		{
 			panel1.Visible = false;
 			panel2.Visible = true;
+			panel3.Visible = false;
 		}
 		void CheckBox3CheckedChanged(object sender, EventArgs e)
 		{
@@ -304,6 +332,28 @@ namespace DiscordRPCCustom
 			}else{
 				label18.Text = "This is not an URI";
 			}
+		}
+		void Timer1Tick(object sender, EventArgs e)
+		{
+			label21.Text = "Current : " + (DateTime.UtcNow.Add(-(startTime.Add(-offsetStamp.TimeOfDay)).TimeOfDay)).ToString("HH:mm:ss");
+			textBox12.Text = startTime.ToString("HH:mm:ss");
+		}
+		void Button7Click(object sender, EventArgs e)
+		{
+			try{
+				DateTime ss = DateTime.Parse(textBox13.Text);
+				offsetStamp = ss;
+				client.UpdateStartTime(startTime.Add(-offsetStamp.TimeOfDay));
+			}catch (Exception ex){
+				textBox13.Text = "00:00:00";
+				MessageBox.Show("Not a valid format : " + ex.ToString(), "Warning!");
+			}
+		}
+		void Button6Click(object sender, EventArgs e)
+		{
+			panel1.Visible = false;
+			panel2.Visible = false;
+			panel3.Visible = true;
 		}
 	}
 }
