@@ -53,7 +53,6 @@ namespace DiscordRPCCustom
 				checkBox3.Checked = setUp;
 				isButtonEnabled = setUp;
 				ButtonGroupChange(setUp);
-				connectStartup();
 				textBox11.Text = splittedRead[11];
 				if(splittedRead.Length > 12){
 					try{
@@ -64,6 +63,7 @@ namespace DiscordRPCCustom
 						//MessageBox.Show("Timestamp Offset broke : " + ex.ToString(), "Warning!");
 					}
 				}
+				connectStartup();
 			}
 			RegistryKey rk = Registry.CurrentUser.OpenSubKey
 	            ("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
@@ -119,6 +119,7 @@ namespace DiscordRPCCustom
 				isClientInitialized = true;
 				isChanged = false;
 				label7.Text = "Connecting to Discord RPC...";
+				button8.Visible = true;
 				button1.Text = "Update";
 			}else{
 				Assets assets = new Assets();
@@ -221,6 +222,7 @@ namespace DiscordRPCCustom
 			isClientInitialized = true;
 			isChanged = false;
 			label7.Text = "Connecting to Discord RPC...";
+			button8.Visible = true;
 			button1.Text = "Update";
 		}
 		void NotifyIcon1MouseDoubleClick(object sender, MouseEventArgs e)
@@ -354,6 +356,13 @@ namespace DiscordRPCCustom
 			panel1.Visible = false;
 			panel2.Visible = false;
 			panel3.Visible = true;
+		}
+		void Button8Click(object sender, EventArgs e)
+		{
+			button1.Text = "Connect";
+			client.Dispose();
+			isClientInitialized = false;
+			button8.Visible = false;
 		}
 	}
 }

@@ -64,6 +64,7 @@ namespace DiscordRPCCustom
 		private System.Windows.Forms.TextBox textBox12;
 		private System.Windows.Forms.Button button6;
 		private System.Windows.Forms.Timer timer1;
+		private System.Windows.Forms.Button button8;
 		
 		/// <summary>
 		/// Disposes resources used by the form.
@@ -139,6 +140,7 @@ namespace DiscordRPCCustom
 			this.textBox12 = new System.Windows.Forms.TextBox();
 			this.button6 = new System.Windows.Forms.Button();
 			this.timer1 = new System.Windows.Forms.Timer(this.components);
+			this.button8 = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			this.panel1.SuspendLayout();
 			this.panel2.SuspendLayout();
@@ -261,7 +263,7 @@ namespace DiscordRPCCustom
 			// 
 			this.button1.BackColor = System.Drawing.SystemColors.Control;
 			this.button1.ForeColor = System.Drawing.SystemColors.ControlText;
-			this.button1.Location = new System.Drawing.Point(294, 266);
+			this.button1.Location = new System.Drawing.Point(294, 272);
 			this.button1.Name = "button1";
 			this.button1.Size = new System.Drawing.Size(75, 23);
 			this.button1.TabIndex = 11;
@@ -662,12 +664,26 @@ namespace DiscordRPCCustom
 			this.timer1.Enabled = true;
 			this.timer1.Tick += new System.EventHandler(this.Timer1Tick);
 			// 
+			// button8
+			// 
+			this.button8.BackColor = System.Drawing.SystemColors.Control;
+			this.button8.ForeColor = System.Drawing.SystemColors.ControlText;
+			this.button8.Location = new System.Drawing.Point(294, 251);
+			this.button8.Name = "button8";
+			this.button8.Size = new System.Drawing.Size(75, 23);
+			this.button8.TabIndex = 38;
+			this.button8.Text = "Disconnect";
+			this.button8.UseVisualStyleBackColor = false;
+			this.button8.Visible = false;
+			this.button8.Click += new System.EventHandler(this.Button8Click);
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
 			this.ClientSize = new System.Drawing.Size(388, 301);
+			this.Controls.Add(this.button8);
 			this.Controls.Add(this.button3);
 			this.Controls.Add(this.pictureBox1);
 			this.Controls.Add(this.button2);
