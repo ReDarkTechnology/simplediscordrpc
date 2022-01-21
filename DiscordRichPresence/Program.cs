@@ -1,15 +1,8 @@
-﻿/*
- * Created by SharpDevelop.
- * User: Fauzi
- * Date: 4/23/2021
- * Time: 11:23 AM
- * 
- * To change this template use Tools | Options | Coding | Edit Standard Headers.
- */
+﻿
 using System;
 using System.Windows.Forms;
 
-namespace DiscordRPCCustom
+namespace DiscordRichPresence
 {
 	/// <summary>
 	/// Class with program entry point.
