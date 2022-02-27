@@ -78,6 +78,11 @@ namespace DiscordRichPresence
 		private System.Windows.Forms.CheckBox TimestampToggle;
 		private System.Windows.Forms.Button N_TimestampPanel;
 		private System.Windows.Forms.Timer timer1;
+		private System.Windows.Forms.CheckBox SystemTrayToggle;
+		private System.Windows.Forms.LinkLabel linkLabel1;
+		private System.Windows.Forms.Panel panel6;
+		private System.Windows.Forms.Label label22;
+		private System.Windows.Forms.CheckBox StartupToggle;
 		
 		/// <summary>
 		/// Disposes resources used by the form.
@@ -150,12 +155,17 @@ namespace DiscordRichPresence
 			this.label17 = new System.Windows.Forms.Label();
 			this.ButtonsToggle = new System.Windows.Forms.CheckBox();
 			this.SettingsPanel = new System.Windows.Forms.Panel();
+			this.StartupToggle = new System.Windows.Forms.CheckBox();
+			this.panel6 = new System.Windows.Forms.Panel();
+			this.label22 = new System.Windows.Forms.Label();
+			this.SystemTrayToggle = new System.Windows.Forms.CheckBox();
 			this.panel10 = new System.Windows.Forms.Panel();
 			this.label19 = new System.Windows.Forms.Label();
 			this.PipeBox = new System.Windows.Forms.TextBox();
 			this.label20 = new System.Windows.Forms.Label();
 			this.AppIdBox = new System.Windows.Forms.TextBox();
 			this.label21 = new System.Windows.Forms.Label();
+			this.linkLabel1 = new System.Windows.Forms.LinkLabel();
 			this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
 			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -186,6 +196,7 @@ namespace DiscordRichPresence
 			this.panel7.SuspendLayout();
 			this.panel8.SuspendLayout();
 			this.SettingsPanel.SuspendLayout();
+			this.panel6.SuspendLayout();
 			this.panel10.SuspendLayout();
 			this.contextMenuStrip1.SuspendLayout();
 			this.TimestampPanel.SuspendLayout();
@@ -329,6 +340,7 @@ namespace DiscordRichPresence
 			this.ProfilePicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.ProfilePicture.TabIndex = 0;
 			this.ProfilePicture.TabStop = false;
+			this.ProfilePicture.Click += new System.EventHandler(this.ProfilePictureClick);
 			// 
 			// panel2
 			// 
@@ -768,17 +780,66 @@ namespace DiscordRichPresence
 			| System.Windows.Forms.AnchorStyles.Right)));
 			this.SettingsPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
 			this.SettingsPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.SettingsPanel.Controls.Add(this.StartupToggle);
+			this.SettingsPanel.Controls.Add(this.panel6);
+			this.SettingsPanel.Controls.Add(this.SystemTrayToggle);
 			this.SettingsPanel.Controls.Add(this.panel10);
 			this.SettingsPanel.Controls.Add(this.PipeBox);
 			this.SettingsPanel.Controls.Add(this.label20);
 			this.SettingsPanel.Controls.Add(this.AppIdBox);
 			this.SettingsPanel.Controls.Add(this.label21);
+			this.SettingsPanel.Controls.Add(this.linkLabel1);
 			this.SettingsPanel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
 			this.SettingsPanel.Location = new System.Drawing.Point(1, 55);
 			this.SettingsPanel.Name = "SettingsPanel";
 			this.SettingsPanel.Size = new System.Drawing.Size(338, 232);
 			this.SettingsPanel.TabIndex = 15;
 			this.SettingsPanel.Visible = false;
+			// 
+			// StartupToggle
+			// 
+			this.StartupToggle.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.StartupToggle.Location = new System.Drawing.Point(3, 146);
+			this.StartupToggle.Name = "StartupToggle";
+			this.StartupToggle.Size = new System.Drawing.Size(118, 24);
+			this.StartupToggle.TabIndex = 10;
+			this.StartupToggle.Text = "Open at startup";
+			this.StartupToggle.UseVisualStyleBackColor = true;
+			this.StartupToggle.CheckedChanged += new System.EventHandler(this.StartupToggleCheckedChanged);
+			// 
+			// panel6
+			// 
+			this.panel6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+			| System.Windows.Forms.AnchorStyles.Right)));
+			this.panel6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
+			this.panel6.Controls.Add(this.label22);
+			this.panel6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+			this.panel6.Location = new System.Drawing.Point(0, 96);
+			this.panel6.Name = "panel6";
+			this.panel6.Size = new System.Drawing.Size(339, 23);
+			this.panel6.TabIndex = 10;
+			// 
+			// label22
+			// 
+			this.label22.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+			this.label22.Location = new System.Drawing.Point(5, 3);
+			this.label22.Name = "label22";
+			this.label22.Size = new System.Drawing.Size(179, 17);
+			this.label22.TabIndex = 0;
+			this.label22.Text = "Application";
+			this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// SystemTrayToggle
+			// 
+			this.SystemTrayToggle.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.SystemTrayToggle.Checked = true;
+			this.SystemTrayToggle.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.SystemTrayToggle.Location = new System.Drawing.Point(3, 126);
+			this.SystemTrayToggle.Name = "SystemTrayToggle";
+			this.SystemTrayToggle.Size = new System.Drawing.Size(118, 24);
+			this.SystemTrayToggle.TabIndex = 9;
+			this.SystemTrayToggle.Text = "Hide on system tray";
+			this.SystemTrayToggle.UseVisualStyleBackColor = true;
 			// 
 			// panel10
 			// 
@@ -799,21 +860,21 @@ namespace DiscordRichPresence
 			this.label19.Name = "label19";
 			this.label19.Size = new System.Drawing.Size(179, 17);
 			this.label19.TabIndex = 0;
-			this.label19.Text = "Application";
+			this.label19.Text = "Rich Presence";
 			this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// PipeBox
 			// 
 			this.PipeBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
 			| System.Windows.Forms.AnchorStyles.Right)));
-			this.PipeBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+			this.PipeBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
 			this.PipeBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.PipeBox.ForeColor = System.Drawing.Color.Cyan;
 			this.PipeBox.Location = new System.Drawing.Point(66, 52);
 			this.PipeBox.Name = "PipeBox";
-			this.PipeBox.ReadOnly = true;
 			this.PipeBox.Size = new System.Drawing.Size(264, 20);
 			this.PipeBox.TabIndex = 3;
+			this.PipeBox.Text = "-1";
 			// 
 			// label20
 			// 
@@ -846,6 +907,19 @@ namespace DiscordRichPresence
 			this.label21.TabIndex = 0;
 			this.label21.Text = "ID";
 			this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// linkLabel1
+			// 
+			this.linkLabel1.ActiveLinkColor = System.Drawing.Color.Teal;
+			this.linkLabel1.LinkColor = System.Drawing.Color.Aqua;
+			this.linkLabel1.Location = new System.Drawing.Point(65, 71);
+			this.linkLabel1.Name = "linkLabel1";
+			this.linkLabel1.Size = new System.Drawing.Size(264, 23);
+			this.linkLabel1.TabIndex = 8;
+			this.linkLabel1.TabStop = true;
+			this.linkLabel1.Text = "Go to developers\\applications";
+			this.linkLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel1LinkClicked);
 			// 
 			// notifyIcon1
 			// 
@@ -1034,10 +1108,10 @@ namespace DiscordRichPresence
 			this.Controls.Add(this.N_ButtonsPanel);
 			this.Controls.Add(this.N_MainPanel);
 			this.Controls.Add(this.WindowToolbar);
-			this.Controls.Add(this.TimestampPanel);
 			this.Controls.Add(this.SettingsPanel);
 			this.Controls.Add(this.ButtonsPanel);
 			this.Controls.Add(this.MainPanel);
+			this.Controls.Add(this.TimestampPanel);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "MainForm";
@@ -1059,6 +1133,7 @@ namespace DiscordRichPresence
 			this.panel8.ResumeLayout(false);
 			this.SettingsPanel.ResumeLayout(false);
 			this.SettingsPanel.PerformLayout();
+			this.panel6.ResumeLayout(false);
 			this.panel10.ResumeLayout(false);
 			this.contextMenuStrip1.ResumeLayout(false);
 			this.TimestampPanel.ResumeLayout(false);

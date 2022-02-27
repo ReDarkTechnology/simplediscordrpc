@@ -1,14 +1,12 @@
 ﻿using System;
 using System.IO;
-using System.Collections.Generic;
-using System.Drawing;
 using System.Windows.Forms;
 using Button = DiscordRPC.Button;
 using DiscordRPC;
 using DiscordRPC.Logging;
 using DiscordRPC.Message;
-using Microsoft.Win32;
 using Newtonsoft.Json;
+using Microsoft.Win32;
 
 namespace DiscordRichPresence
 {
@@ -16,7 +14,7 @@ namespace DiscordRichPresence
 	{
 		#region Form
 		public static MainForm self;
-		public MainForm()
+		public MainForm(string[] args)
 		{
 			self = this;
 			InitializeComponent();
@@ -27,6 +25,10 @@ namespace DiscordRichPresence
 			WindowToolbar.MouseDown += MainForm_MouseDown;
 			W_TitleText.MouseDown += MainForm_MouseDown;
 			W_Icon.MouseDown += MainForm_MouseDown;
+			if(args.Length > 0)
+			{
+				savePath = args[0] + savePath;
+			}
 			preference = GetPreference();
 			if(preference != null)
 			{
@@ -38,6 +40,7 @@ namespace DiscordRichPresence
 				preference = new Preference();
 				ChangeTab(2);
 			}
+			StartupToggle.Checked = IsApplicationOnStartup();
 			startTime = DateTime.UtcNow;
 		}
 		public Panel[] panels;
@@ -53,7 +56,10 @@ namespace DiscordRichPresence
 		}
 		void W_CloseButtonClick(object sender, EventArgs e)
 		{
-			Hide();
+			if(SystemTrayToggle.Checked)
+				Hide();
+			else
+				this.Dispose();
 		}
 		void ConnectButtonClick(object sender, EventArgs e)
 		{
@@ -65,12 +71,7 @@ namespace DiscordRichPresence
 		}
 		void DisconnectButtonClick(object sender, EventArgs e)
 		{
-			if(client != null)
-			{
-				SetProfile(false);
-				client.Dispose();
-				client = null;
-			}
+			Disconnect();
 		}
 		void N_MainPanelClick(object sender, EventArgs e)
 		{
@@ -107,6 +108,19 @@ namespace DiscordRichPresence
 		{
 			Show();
 		}
+		void Timer1Tick(object sender, EventArgs e)
+		{
+			T_StartBox.Text = startTime.ToString("HH:mm:ss");
+			try {
+				T_ElapsedTime.Text = "Elapsed: " + (DateTime.UtcNow.Add(-(startTime.Add(-offsetStamp.TimeOfDay)).TimeOfDay)).ToString("HH:mm:ss");
+			} catch {
+				Console.WriteLine("Some error occured");
+			}
+		}
+		void StartupToggleCheckedChanged(object sender, EventArgs e)
+		{
+			SetApplicationStartup(StartupToggle.Checked);
+		}
 		#endregion
 		
 		#region Presence
@@ -129,6 +143,14 @@ namespace DiscordRichPresence
 				try 
 				{
 					self.ProfileStatus.Text = "Connecting";
+					try 
+					{
+						pipe = int.Parse(self.PipeBox.Text);
+					}
+					catch
+					{
+						self.PipeBox.Text = pipe.ToString();
+					}
 					client = new DiscordRpcClient(preference.applicationID, pipe, new ConsoleLogger(logLevel, true), true, new DiscordRPC.IO.ManagedNamedPipeClient());
 					client.OnConnectionEstablished += (a, i) => {
 						pipe = i.ConnectedPipe;
@@ -169,22 +191,39 @@ namespace DiscordRichPresence
 		static void client_OnConnectionFailed(object sender, ConnectionFailedMessage args)
 		{
 			MessageBox.Show("Connection failed! Pipe: " + args.FailedPipe, "Discord Rich Presence", MessageBoxButtons.OK, MessageBoxIcon.Error);
-			SetProfile(false);
+			Disconnect();
 		}
 
 		static void client_OnError(object sender, ErrorMessage args)
 		{
 			MessageBox.Show("Error occurred! " + args.Message, "Discord Rich Presence", MessageBoxButtons.OK, MessageBoxIcon.Error);
-			SetProfile(false);
+			Disconnect();
 		}
-		public static void SetProfile(bool to, User user = null)
+		public static string pfpExt;
+		public static User currentUser;
+		public static void SetProfile(bool to, User user = null, bool forcePNG = false)
 		{
+			currentUser = user;
 			self.ProfileName.Text = to ? user.Username + "#" + user.Discriminator : "N/A";
 			self.ProfileStatus.Text = to ? "Connected" : "Disconnected";
 			if(to)
-				self.ProfilePicture.LoadAsync(user.GetAvatarURL(User.AvatarFormat.PNG, User.AvatarSize.x1024));
+			{
+				var g = user.GetAvatarURL(User.AvatarFormat.GIF, User.AvatarSize.x1024);
+				if(string.IsNullOrWhiteSpace(g) || forcePNG){
+					self.ProfilePicture.LoadAsync(user.GetAvatarURL(User.AvatarFormat.PNG, User.AvatarSize.x1024));
+					pfpExt = ".png";
+				}
+				else
+				{
+					self.ProfilePicture.LoadAsync(g);
+					pfpExt = ".gif";
+				}
+			}
 			else
+			{
 				self.ProfilePicture.Image = null;
+				pfpExt = null;
+			}
 			self.DisconnectButton.Enabled = to;
 			self.ConnectButton.Text = to ? "Update" : "Connect";
 		}
@@ -250,6 +289,7 @@ namespace DiscordRichPresence
 			{
 				preference.presence.Timestamps = null;
 			}
+			preference.hideOnSystemTray = SystemTrayToggle.Checked;
 			SavePreference();
 		}
 		public void SetCodeToForm()
@@ -271,6 +311,7 @@ namespace DiscordRichPresence
 			BB_LinkBox.Text = preference.presence.Buttons.Length > 1 ? preference.presence.Buttons[1].Url : null;
 			T_OffsetBox.Text = preference.offset;
 			TimestampToggle.Checked = preference.timestampEnabled;
+			SystemTrayToggle.Checked = preference.hideOnSystemTray;
 		}
 		public void TryConnect()
 		{
@@ -288,23 +329,110 @@ namespace DiscordRichPresence
 		{
 			File.WriteAllText(savePath, JsonConvert.SerializeObject(preference));
 		}
-		void Timer1Tick(object sender, EventArgs e)
+		public static void Disconnect()
 		{
-			T_StartBox.Text = startTime.ToString("HH:mm:ss");
-			try {
-				T_ElapsedTime.Text = "Elapsed: " + (DateTime.UtcNow.Add(-(startTime.Add(-offsetStamp.TimeOfDay)).TimeOfDay)).ToString("HH:mm:ss");
-			} catch {
+			if(client != null)
+			{
+				SetProfile(false);
+				client.Dispose();
+				client = null;
 			}
+		}
+		public static bool IsApplicationOnStartup()
+		{
+			RegistryKey rk = Registry.CurrentUser.OpenSubKey
+	            ("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+			bool r = rk.GetValue("DiscordRPC", null) != null;
+			rk.Close();
+			return r;
+		}
+		public static void SetApplicationStartup(bool to)
+		{
+	       	RegistryKey rk = Registry.CurrentUser.OpenSubKey
+	            ("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+	        if (to)
+	            rk.SetValue("DiscordRPC", Application.ExecutablePath);
+	        else
+	            rk.DeleteValue("DiscordRPC", false);
+	        rk.Close();
+		}
+		void ProfilePictureClick(object sender, EventArgs e)
+		{
+			if (!string.IsNullOrWhiteSpace(pfpExt)) {
+				var form = new Form();
+				var box = new PictureBox();
+				form.Controls.Add(box);
+				box.Size = form.Size;
+				box.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
+				box.SizeMode = PictureBoxSizeMode.Zoom;
+				box.Image = ProfilePicture.Image;
+				form.MouseClick += (ee, aa) => {
+					if (aa.Button == MouseButtons.Right) {
+						var cm = new ContextMenuStrip();
+						var item = cm.Items.Add("Save");
+						item.Click += (i, op) => {
+							var d = new SaveFileDialog();
+							d.Filter = string.Format("Picture file (*{0})|*{0}", pfpExt);
+							if (d.ShowDialog() == DialogResult.OK) {
+								ProfilePicture.Image.Save(d.FileName);
+							}
+						};
+						var ftpng = cm.Items.Add("Force to PNG");
+						ftpng.Click += (oo, a) =>
+						{
+							SetProfile(true, currentUser, true);
+							ProfilePicture.LoadCompleted += (o, l) => 
+							{
+								box.Image = ProfilePicture.Image;
+							};
+						};
+						cm.Show(Cursor.Position);
+					}
+				};
+				box.MouseClick += (ee, aa) => 
+				{
+					if (aa.Button == MouseButtons.Right) {
+						var cm = new ContextMenuStrip();
+						var item = cm.Items.Add("Save");
+						item.Click += (i, op) => {
+							var d = new SaveFileDialog();
+							d.Filter = string.Format("Picture file (*{0})|*{0}", pfpExt);
+							if (d.ShowDialog() == DialogResult.OK) {
+								ProfilePicture.Image.Save(d.FileName);
+							}
+						};
+						var ftpng = cm.Items.Add("Force to PNG");
+						ftpng.Click += (oo, a) =>
+						{
+							SetProfile(true, currentUser, true);
+							ProfilePicture.LoadCompleted += (o, l) => 
+							{
+								box.Image = ProfilePicture.Image;
+							};
+						};
+						cm.Show(Cursor.Position);
+					}
+				};
+				form.Icon = Icon;
+				form.Text = "Profile Picture Viewer";
+				form.Size = new System.Drawing.Size(512, 512);
+				form.Show();
+			}
+		}
+		void LinkLabel1LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+		{
+			System.Diagnostics.Process.Start("https://discord.com/developers/applications");
 		}
 		#endregion
 	}
 	public class Preference
 	{
 		public string applicationID;
-		public int pipe;
+		public int pipe = -1;
 		public bool buttonEnabled;
 		public bool timestampEnabled;
-		public string offset;
+		public bool hideOnSystemTray = true;
+		public string offset = "00:00:00";
 		public RichPresence presence;
 	}
 	
