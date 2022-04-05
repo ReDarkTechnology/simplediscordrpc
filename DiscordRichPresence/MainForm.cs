@@ -201,22 +201,22 @@ namespace DiscordRichPresence
 		}
 		public static string pfpExt;
 		public static User currentUser;
-		public static void SetProfile(bool to, User user = null, bool forcePNG = false)
+		public static void SetProfile(bool to, User user = null, bool forceGIF = false)
 		{
 			currentUser = user;
 			self.ProfileName.Text = to ? user.Username + "#" + user.Discriminator : "N/A";
 			self.ProfileStatus.Text = to ? "Connected" : "Disconnected";
 			if(to)
 			{
-				var g = user.GetAvatarURL(User.AvatarFormat.GIF, User.AvatarSize.x1024);
-				if(string.IsNullOrWhiteSpace(g) || forcePNG){
-					self.ProfilePicture.LoadAsync(user.GetAvatarURL(User.AvatarFormat.PNG, User.AvatarSize.x1024));
-					pfpExt = ".png";
+				var g = user.GetAvatarURL(User.AvatarFormat.PNG, User.AvatarSize.x1024);
+				if(string.IsNullOrWhiteSpace(g) || forceGIF){
+					self.ProfilePicture.LoadAsync(user.GetAvatarURL(User.AvatarFormat.GIF, User.AvatarSize.x1024));
+					pfpExt = ".gif";
 				}
 				else
 				{
 					self.ProfilePicture.LoadAsync(g);
-					pfpExt = ".gif";
+					pfpExt = ".png";
 				}
 			}
 			else
@@ -377,7 +377,7 @@ namespace DiscordRichPresence
 								ProfilePicture.Image.Save(d.FileName);
 							}
 						};
-						var ftpng = cm.Items.Add("Force to PNG");
+						var ftpng = cm.Items.Add("Force to GIF");
 						ftpng.Click += (oo, a) =>
 						{
 							SetProfile(true, currentUser, true);
@@ -401,7 +401,7 @@ namespace DiscordRichPresence
 								ProfilePicture.Image.Save(d.FileName);
 							}
 						};
-						var ftpng = cm.Items.Add("Force to PNG");
+						var ftpng = cm.Items.Add("Force to GIF");
 						ftpng.Click += (oo, a) =>
 						{
 							SetProfile(true, currentUser, true);
