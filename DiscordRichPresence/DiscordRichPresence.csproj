@@ -10,7 +10,7 @@
     <AssemblyName>DiscordRichPresence</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <ApplicationIcon>..\..\..\..\GitHub\simplediscordrpc\DiscordRPCCustom\icons8_discord_100.ico</ApplicationIcon>
+    <ApplicationIcon>lib\icons8_discord_100.ico</ApplicationIcon>
     <NoWin32Manifest>False</NoWin32Manifest>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
@@ -35,13 +35,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DiscordRPC">
-      <HintPath>..\..\..\..\GitHub\simplediscordrpc\DiscordRPCCustom\bin\Debug\DiscordRPC.dll</HintPath>
+      <HintPath>lib\DiscordRPC.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\..\GitHub\simplediscordrpc\DiscordRPCCustom\bin\Debug\Newtonsoft.Json.dll</HintPath>
+      <HintPath>lib\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">

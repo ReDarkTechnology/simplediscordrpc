@@ -6,6 +6,7 @@ using DiscordRPC;
 using DiscordRPC.Logging;
 using DiscordRPC.Message;
 using Newtonsoft.Json;
+using System.Net;
 using Microsoft.Win32;
 
 namespace DiscordRichPresence
@@ -16,6 +17,8 @@ namespace DiscordRichPresence
 		public static MainForm self;
 		public MainForm(string[] args)
 		{
+			ServicePointManager.Expect100Continue = true;
+			ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 			self = this;
 			InitializeComponent();
 			panels = new Panel[]{
