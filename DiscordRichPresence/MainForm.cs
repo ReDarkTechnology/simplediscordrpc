@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Windows.Forms;
+using System.Collections.Generic;
 using Button = DiscordRPC.Button;
 using DiscordRPC;
 using DiscordRPC.Logging;
@@ -261,15 +262,16 @@ namespace DiscordRichPresence
 			preference.presence.Assets.SmallImageText = SI_TooltipBox.Text;
 			preference.buttonEnabled = ButtonsToggle.Checked;
 			if(ButtonsToggle.Checked) {
-				if (Uri.IsWellFormedUriString(TB_LinkBox.Text, UriKind.Absolute) &&
-				    Uri.IsWellFormedUriString(BB_LinkBox.Text, UriKind.Absolute)) {
-					preference.presence.Buttons = new Button[] {
-						Utility.CreateButton(TB_TextBox.Text, TB_LinkBox.Text),
-						Utility.CreateButton(BB_TextBox.Text, BB_LinkBox.Text)
-					};
-				} else {
-					preference.presence.Buttons = new Button[] { };
+				var buttons = new List<Button>();
+				if (Uri.IsWellFormedUriString(TB_LinkBox.Text, UriKind.Absolute))
+				{
+					buttons.Add(Utility.CreateButton(TB_TextBox.Text, TB_LinkBox.Text));
 				}
+				if (Uri.IsWellFormedUriString(BB_LinkBox.Text, UriKind.Absolute))
+				{
+					buttons.Add(Utility.CreateButton(BB_TextBox.Text, BB_LinkBox.Text));
+				}
+				preference.presence.Buttons = buttons.ToArray();
 			} else {
 				preference.presence.Buttons = new Button[] { };
 			}
@@ -330,7 +332,14 @@ namespace DiscordRichPresence
 		}
 		public static void SavePreference()
 		{
-			File.WriteAllText(savePath, JsonConvert.SerializeObject(preference));
+			try
+			{
+				File.WriteAllText(savePath, JsonConvert.SerializeObject(preference));
+			}
+			catch (Exception e)
+			{
+				MessageBox.Show("Failed to save file: " + e.Message + e.StackTrace, "Discord RPC");
+			}
 		}
 		public static void Disconnect()
 		{
