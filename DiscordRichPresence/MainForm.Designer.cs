@@ -1112,7 +1112,7 @@ namespace DiscordRichPresence
             this.N_PluginsPanel.TabIndex = 18;
             this.N_PluginsPanel.Text = "Plugins";
             this.N_PluginsPanel.UseVisualStyleBackColor = true;
-            this.N_PluginsPanel.Click += new System.EventHandler(this.N_PluginsPanel_Click);
+            //this.N_PluginsPanel.Click += new System.EventHandler(this.N_PluginsPanel_Click);
             // 
             // pluginsPanel
             // 
@@ -1174,7 +1174,7 @@ namespace DiscordRichPresence
             this.ReloadPluginsButton.TabIndex = 19;
             this.ReloadPluginsButton.Text = "Reload All";
             this.ReloadPluginsButton.UseVisualStyleBackColor = true;
-            this.ReloadPluginsButton.Click += new System.EventHandler(this.ReloadButton_Click);
+            //this.ReloadPluginsButton.Click += new System.EventHandler(this.ReloadButton_Click);
             // 
             // MainForm
             // 

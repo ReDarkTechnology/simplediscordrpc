@@ -189,19 +189,17 @@ namespace DiscordRichPresence
 			self.SetFormToCode();
 			client.SetPresence(preference.presence);
 		}
+        static void client_OnConnectionFailed(object sender, ConnectionFailedMessage args)
+        {
+            MessageBox.Show("Connection failed! Pipe: " + args.FailedPipe, "Discord Rich Presence", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            Disconnect();
+        }
+        static void client_OnReady(object sender, ReadyMessage args)
+        {
+            SetProfile(true, args.User);
+        }
 
-            self = this;
-            InitializeComponent();
-            panels = new Panel[]{
-                MainPanel, ButtonsPanel, SettingsPanel, TimestampPanel, pluginsPanel
-            };
-
-            MouseDown += MainForm_MouseDown;
-            WindowToolbar.MouseDown += MainForm_MouseDown;
-            W_TitleText.MouseDown += MainForm_MouseDown;
-            W_Icon.MouseDown += MainForm_MouseDown;
-
-		static void client_OnError(object sender, ErrorMessage args)
+        static void client_OnError(object sender, ErrorMessage args)
 		{
 			MessageBox.Show("Error occurred! " + args.Message, "Discord Rich Presence", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			Disconnect();
